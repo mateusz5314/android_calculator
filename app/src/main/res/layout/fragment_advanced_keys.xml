@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".FragmentAdvancedKeys">
+
+    <Button
+        android:id="@+id/sin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:onClick="onAdvancedSignClick"
+        android:text="@string/sin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.20" />
+
+    <Button
+        android:id="@+id/cos"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:onClick="onAdvancedSignClick"
+        android:text="@string/cos"
+        app:layout_constraintStart_toEndOf="@+id/sin"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.20" />
+
+    <Button
+        android:id="@+id/tan"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:onClick="onAdvancedSignClick"
+        android:text="@string/tan"
+        app:layout_constraintStart_toEndOf="@+id/cos"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.20 " />
+
+    <Button
+        android:id="@+id/ln"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:onClick="onAdvancedSignClick"
+        android:text="@string/ln"
+        app:layout_constraintStart_toEndOf="@+id/tan"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.20" />
+
+    <Button
+        android:id="@+id/log"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:onClick="onAdvancedSignClick"
+        android:text="@string/log"
+        app:layout_constraintStart_toEndOf="@+id/ln"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.20" />
+
+    <Button
+        android:id="@+id/percent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:onClick="onAdvancedSignClick"
+        android:text="@string/percent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sin"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.25" />
+
+    <Button
+        android:id="@+id/sqrt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:onClick="onAdvancedSignClick"
+        android:text="@string/sqrt"
+        app:layout_constraintStart_toEndOf="@id/percent"
+        app:layout_constraintTop_toBottomOf="@+id/tan"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.25" />
+
+    <Button
+        android:id="@+id/square"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:onClick="onAdvancedSignClick"
+        android:text="@string/square"
+        app:layout_constraintStart_toEndOf="@id/sqrt"
+        app:layout_constraintTop_toBottomOf="@+id/ln"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.25" />
+
+    <Button
+        android:id="@+id/toPowOf"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:onClick="onAdvancedSignClick"
+        android:text="@string/toPowOf"
+        app:layout_constraintStart_toEndOf="@+id/square"
+        app:layout_constraintTop_toBottomOf="@+id/log"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.25" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

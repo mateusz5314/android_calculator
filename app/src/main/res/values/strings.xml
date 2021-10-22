@@ -7,7 +7,6 @@
     <string name="advanced">Advanced</string>
     <string name="about">About</string>
     <string name="exit">Exit</string>
-    <string name="wroc">Wroc</string>
     <string name="back">Back</string>
     <string name="simple_mode">Simple Mode</string>
     <string name="_0">0</string>
@@ -27,4 +26,22 @@
     <string name="multiply">*</string>
     <string name="subtract">-</string>
     <string name="add">+</string>
+    <string name="sin">sin</string>
+    <string name="cos">cos</string>
+    <string name="tan">tan</string>
+    <string name="ln">ln</string>
+    <string name="log">log</string>
+    <string name="percent">%</string>
+    <string name="sqrt">√</string>
+    <string name="square">x^2</string>
+    <string name="toPowOf">x^y</string>
+    <string name="advanced_mode">Advanced mode</string>
+    <string name="authorDescription"><b>Author</b>: Mateusz Janiak
+        \n<b>Index:</b> 224815
+        \n<b>University:</b> Lodz University of Technology
+        \n<i>Faculty of Electrical, Electronic, Computer and Control Engineering</i>
+        \n<b>Programme:</b> Computer Science
+        \n<b>Semester:</b> 7
+    </string>
+
 </resources>
