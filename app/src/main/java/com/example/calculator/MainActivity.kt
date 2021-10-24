@@ -48,7 +48,6 @@ class MainActivity : FragmentActivity() {
         // Restore state from savedInstanceState
         val currScreen = savedInstanceState.get("CurrentScreen")
         when (currScreen) {
-            CurrScreen.MENU     -> buttonBack(this.findViewById(R.id.fragmentContainer))
             CurrScreen.SIMPLE   -> buttonSimple(this.findViewById(R.id.fragmentContainer))
             CurrScreen.ADVANCED -> buttonAdvanced(this.findViewById(R.id.fragmentContainer))
             CurrScreen.ABOUT    -> buttonAbout(this.findViewById(R.id.fragmentContainer))
@@ -92,6 +91,8 @@ class MainActivity : FragmentActivity() {
         val transaction: FragmentTransaction = mManager.beginTransaction()
         transaction.replace(R.id.fragmentContainer, FragmentAbout(), null)
         transaction.commit()
+
+        mViewControl.removeFragment()
         mCurrentScreen = CurrScreen.ABOUT
     }
 

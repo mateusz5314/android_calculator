@@ -8,7 +8,8 @@ import javax.security.auth.callback.Callback
 class ViewControl {
     enum class WorkingMode {
         SIMPLE,
-        ADVANCED
+        ADVANCED,
+        ABOUT
     }
     private var mCurrentText: String = ""
     private lateinit var mFragmentSimple: FragmentSimple
@@ -25,6 +26,11 @@ class ViewControl {
     {
         mFragmentAdvanced = fragment
         mWorkingMode = WorkingMode.ADVANCED
+    }
+
+    fun removeFragment()
+    {
+        mWorkingMode = WorkingMode.ABOUT
     }
 
     fun clearChar()
@@ -48,13 +54,10 @@ class ViewControl {
 
     private fun updateFragmentView(text: String)
     {
-        if (mWorkingMode == WorkingMode.ADVANCED)
-        {
-            mFragmentAdvanced.updateCurrentEntry(text)
-        }
-        else
-        {
-            mFragmentSimple.updateCurrentEntry(text)
+        when (mWorkingMode) {
+            WorkingMode.ADVANCED -> mFragmentAdvanced.updateCurrentEntry(text)
+            WorkingMode.SIMPLE   -> mFragmentSimple.updateCurrentEntry(text)
+            else -> {}//  nothing to do
         }
     }
 }
