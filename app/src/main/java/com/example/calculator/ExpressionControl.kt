@@ -1,21 +1,25 @@
 package com.example.calculator
 
 import android.content.Context
-import android.util.Log
 import android.widget.Toast
-import net.objecthunter.exp4j.Expression
 import net.objecthunter.exp4j.ExpressionBuilder
+import java.lang.Exception
 
-class NumbersControl {
-    private val MAX_DIGITS = 20
+class ExpressionControl {
+    private val MAXLENGHT = 30
     private lateinit var mContext: Context
     private lateinit var mViewControl: ViewControl
 
-    private var mCurrentNumber: String = ""
+    private var mCurrentExpression: String = ""
 
     fun setContext(context: Context)
     {
         mContext = context
+    }
+
+    fun refresh()
+    {
+        pushBack("")
     }
 
     fun setViewControl(viewControl: ViewControl) {
@@ -24,7 +28,7 @@ class NumbersControl {
 
     fun newDigit(value: Int)
     {
-        if (mCurrentNumber.length < MAX_DIGITS)
+        if (mCurrentExpression.length < MAXLENGHT)
         {
             pushBack(value.toString())
         }
@@ -33,58 +37,68 @@ class NumbersControl {
     fun clearOne()
     {
         mViewControl.clearChar()
-        mCurrentNumber = mCurrentNumber.dropLast(1)
+        mCurrentExpression = mCurrentExpression.dropLast(1)
     }
 
     fun clearAll()
     {
         mViewControl.clearText()
-        mCurrentNumber = ""
+        mCurrentExpression = ""
+    }
+
+    fun bracketL()
+    {
+        pushBack("(")
+    }
+
+    fun bracketR()
+    {
+        pushBack(")")
     }
 
     fun sin()
     {
-
+        pushBack("sin(")
     }
 
     fun cos()
     {
-
+        pushBack("cos(")
     }
 
     fun tan()
     {
-
+        pushBack("tan(")
     }
 
     fun ln()
     {
-
+        pushBack("ln(")
     }
 
     fun log()
     {
-
+        pushBack("log")
     }
 
     fun percent()
     {
-
+        pushBack("%")
     }
 
     fun sqrt()
     {
-
+        pushBack("sqrt(")
     }
 
     fun square()
     {
-
+        pushBack("^2")
     }
 
     fun toPowOf()
     {
-
+        pushBack("^")
     }
 
     fun divide()
@@ -114,15 +128,23 @@ class NumbersControl {
 
     fun equal()
     {
-        val e = ExpressionBuilder(mCurrentNumber).build()
-        clearAll()
-        mCurrentNumber = e.evaluate().toString()
-        mViewControl.addText(mCurrentNumber)
+        try {
+            val e = ExpressionBuilder(mCurrentExpression).build()
+            clearAll()
+            mCurrentExpression = e.evaluate().toString()
+            mViewControl.addText(mCurrentExpression)
+        }
+        catch (e: Exception)
+        {
+            val msg = "Incorrect operation"
+            val toast = Toast.makeText(mContext, msg, msg.length)
+            toast.show()
+        }
     }
 
     private fun pushBack(value: String)
     {
-        mCurrentNumber += value
+        mCurrentExpression += value
         mViewControl.addText(value)
     }
 }

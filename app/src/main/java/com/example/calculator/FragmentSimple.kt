@@ -16,6 +16,7 @@ import android.widget.TextView
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
+private var mCurrentText: String = ""
 
 /**
  * A simple [Fragment] subclass.
@@ -37,7 +38,7 @@ class FragmentSimple : Fragment() {
     : View {
         val v: View = inflater.inflate(R.layout.fragment_simple, container, false)
         mTextView = v.findViewById<TextView>(R.id.currentEntry)
-        mTextView.text = "-------------"
+        mTextView.text = mCurrentText
         return v
     }
 
@@ -63,6 +64,13 @@ class FragmentSimple : Fragment() {
 
     fun updateCurrentEntry(text: String)
     {
-        mTextView.text = text
+        try
+        {
+            mTextView.text = text
+            mCurrentText = text
+        }
+        catch (e: Exception)
+        {
+        }
     }
 }

@@ -11,11 +11,19 @@ import kotlin.system.exitProcess
 
 class MainActivity : FragmentActivity() {
 
+    enum class CurrScreen
+    {
+        MENU,
+        SIMPLE,
+        ADVANCED,
+        ABOUT
+    }
     private val mManager: FragmentManager  = supportFragmentManager
-    private val mNumbersControl: NumbersControl = NumbersControl()
+    private val mExpressionControl: ExpressionControl = ExpressionControl()
     private val mViewControl: ViewControl = ViewControl()
     private val mFragmentSimple: FragmentSimple = FragmentSimple()
     private val mFragmentAdvanced: FragmentAdvanced = FragmentAdvanced()
+    private var mCurrentScreen: CurrScreen = CurrScreen.MENU
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,8 +33,26 @@ class MainActivity : FragmentActivity() {
         transaction.replace(R.id.fragmentContainer, FragmentMenu(), null)
         transaction.commit()
 
-        mNumbersControl.setContext(applicationContext)
-        mNumbersControl.setViewControl(mViewControl)
+        mExpressionControl.setContext(applicationContext)
+        mExpressionControl.setViewControl(mViewControl)
+    }
+
+    override fun onSaveInstanceState(savedInstanceState: Bundle) {
+        super.onSaveInstanceState(savedInstanceState)
+        // Save state to the savedInstanceState
+        savedInstanceState.putSerializable("CurrentScreen", mCurrentScreen)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        // Restore state from savedInstanceState
+        val currScreen = savedInstanceState.get("CurrentScreen")
+        when (currScreen) {
+            CurrScreen.MENU     -> buttonBack(this.findViewById(R.id.fragmentContainer))
+            CurrScreen.SIMPLE   -> buttonSimple(this.findViewById(R.id.fragmentContainer))
+            CurrScreen.ADVANCED -> buttonAdvanced(this.findViewById(R.id.fragmentContainer))
+            CurrScreen.ABOUT    -> buttonAbout(this.findViewById(R.id.fragmentContainer))
+        }
     }
 
     fun buttonSimple(view: View){
@@ -40,6 +66,7 @@ class MainActivity : FragmentActivity() {
         transaction.commit()
 
         mViewControl.setFragment(mFragmentSimple)
+        mCurrentScreen = CurrScreen.SIMPLE
     }
 
     fun buttonAdvanced(view: View){
@@ -54,6 +81,7 @@ class MainActivity : FragmentActivity() {
         transaction.commit()
 
         mViewControl.setFragment(mFragmentAdvanced)
+        mCurrentScreen = CurrScreen.ADVANCED
     }
 
     fun buttonAbout(view: View){
@@ -64,6 +92,7 @@ class MainActivity : FragmentActivity() {
         val transaction: FragmentTransaction = mManager.beginTransaction()
         transaction.replace(R.id.fragmentContainer, FragmentAbout(), null)
         transaction.commit()
+        mCurrentScreen = CurrScreen.ABOUT
     }
 
     fun buttonExit(view: View){
@@ -84,61 +113,66 @@ class MainActivity : FragmentActivity() {
         transaction.replace(R.id.fragmentContainer, FragmentMenu(), null)
         transaction.addToBackStack(null)
         transaction.commit()
+
+        mExpressionControl.clearAll()
+        mCurrentScreen = CurrScreen.MENU
     }
 
     fun onNumberClick(view: View)
     {
         when (view.id) {
-            R.id._0 -> mNumbersControl.newDigit(0)
-            R.id._1 -> mNumbersControl.newDigit(1)
-            R.id._2 -> mNumbersControl.newDigit(2)
-            R.id._3 -> mNumbersControl.newDigit(3)
-            R.id._4 -> mNumbersControl.newDigit(4)
-            R.id._5 -> mNumbersControl.newDigit(5)
-            R.id._6 -> mNumbersControl.newDigit(6)
-            R.id._7 -> mNumbersControl.newDigit(7)
-            R.id._8 -> mNumbersControl.newDigit(8)
-            R.id._9 -> mNumbersControl.newDigit(9)
+            R.id._0 -> mExpressionControl.newDigit(0)
+            R.id._1 -> mExpressionControl.newDigit(1)
+            R.id._2 -> mExpressionControl.newDigit(2)
+            R.id._3 -> mExpressionControl.newDigit(3)
+            R.id._4 -> mExpressionControl.newDigit(4)
+            R.id._5 -> mExpressionControl.newDigit(5)
+            R.id._6 -> mExpressionControl.newDigit(6)
+            R.id._7 -> mExpressionControl.newDigit(7)
+            R.id._8 -> mExpressionControl.newDigit(8)
+            R.id._9 -> mExpressionControl.newDigit(9)
         }
     }
 
     fun onAdvancedSignClick(view: View)
     {
         when (view.id) {
-            R.id.sin     -> mNumbersControl.sin()
-            R.id.cos     -> mNumbersControl.cos()
-            R.id.tan     -> mNumbersControl.tan()
-            R.id.ln      -> mNumbersControl.ln()
-            R.id.log     -> mNumbersControl.log()
-            R.id.percent -> mNumbersControl.percent()
-            R.id.sqrt    -> mNumbersControl.sqrt()
-            R.id.square  -> mNumbersControl.square()
-            R.id.toPowOf -> mNumbersControl.toPowOf()
+            R.id.sin     -> mExpressionControl.sin()
+            R.id.cos     -> mExpressionControl.cos()
+            R.id.tan     -> mExpressionControl.tan()
+            R.id.ln      -> mExpressionControl.ln()
+            R.id.log     -> mExpressionControl.log()
+            R.id.percent -> mExpressionControl.percent()
+            R.id.sqrt    -> mExpressionControl.sqrt()
+            R.id.square  -> mExpressionControl.square()
+            R.id.toPowOf -> mExpressionControl.toPowOf()
         }
     }
 
     fun onSignClick(view: View)
     {
         when (view.id) {
-            R.id.divide   -> mNumbersControl.divide()
-            R.id.multiply -> mNumbersControl.multiply()
-            R.id.subtract -> mNumbersControl.subtract()
-            R.id.add      -> mNumbersControl.add()
-            R.id._coma    -> mNumbersControl._coma()
-            R.id.equal    -> mNumbersControl.equal()
+            R.id.divide       -> mExpressionControl.divide()
+            R.id.multiply     -> mExpressionControl.multiply()
+            R.id.subtract     -> mExpressionControl.subtract()
+            R.id.add          -> mExpressionControl.add()
+            R.id._coma        -> mExpressionControl._coma()
+            R.id.equal        -> mExpressionControl.equal()
+            R.id.bracketLeft  -> mExpressionControl.bracketL()
+            R.id.bracketRight -> mExpressionControl.bracketR()
         }
     }
 
     fun onClearOneClick(view: View)
     {
         when (view.id) {
-            R.id.cce -> mNumbersControl.clearOne()
+            R.id.cce -> mExpressionControl.clearOne()
         }
     }
 
     fun onClearAllClick(): Boolean
     {
-        mNumbersControl.clearAll()
+        mExpressionControl.clearAll()
         return true
     }
 }

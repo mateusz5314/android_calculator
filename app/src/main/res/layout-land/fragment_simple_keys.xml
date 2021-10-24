@@ -187,9 +187,33 @@
         android:layout_height="0dp"
         android:onClick="onSignClick"
         android:text="@string/equal"
-        app:layout_constraintBottom_toBottomOf="@+id/subtract"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/divide"
+        app:layout_constraintTop_toBottomOf="@id/bracketRight"
+        app:layout_constraintBottom_toBottomOf="@id/subtract" />
+
+
+    <Button
+        android:id="@+id/bracketLeft"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:onClick="onSignClick"
+        android:text="@string/bracketLeft"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/cce"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.2" />
+
+    <Button
+        android:id="@+id/bracketRight"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:onClick="onSignClick"
+        android:text="@string/bracketRight"
+        app:layout_constraintStart_toEndOf="@id/divide"
+        app:layout_constraintTop_toBottomOf="@id/bracketLeft"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

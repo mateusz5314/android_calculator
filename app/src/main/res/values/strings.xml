@@ -43,5 +43,7 @@
         \n<b>Programme:</b> Computer Science
         \n<b>Semester:</b> 7
     </string>
+    <string name="bracketLeft">(</string>
+    <string name="bracketRight">)</string>
 
 </resources>
